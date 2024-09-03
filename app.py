@@ -5,15 +5,17 @@ from sklearn.model_selection import train_test_split
 
 app = Flask(__name__)
 
-# Carga y prepara el modelo
+# Load and prepare the model
 train = pd.read_csv('Entrenado.csv').drop('Unnamed: 133', axis=1)
 test = pd.read_csv('Examen1.csv')
 
-P = train[["prognosis"]]
+P = train["prognosis"]  # Changed to a Series instead of a DataFrame
 X = train.drop(["prognosis"], axis=1)
-Y = test.drop(["prognosis"], axis=1)
 
+# Split the training data
 xtrain, xtest, ytrain, ytest = train_test_split(X, P, test_size=0.2, random_state=42)
+
+# Train the RandomForest model
 rf = RandomForestClassifier(random_state=42)
 model_rf = rf.fit(xtrain, ytrain)
 
@@ -32,4 +34,5 @@ def predict():
     return jsonify(disease_probabilities=sorted_diseases)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
+
