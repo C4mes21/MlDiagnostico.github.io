@@ -34,4 +34,4 @@ def predict():
     return jsonify(disease_probabilities=sorted_diseases)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False, )
