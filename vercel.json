@@ -1,9 +1,10 @@
 {
-    "builds" : [
-        {"src" : "app.py", "use" : "@vercel/python"}
-    ],
-    "routes" : [
-        {"src" : "/(.*)", "dest" : "app.py"}
-    ],
-    "buildCommand": "pip install --upgrade pip"
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "50mb" }
+    }
+  ],
+  "buildCommand": "pip install --upgrade pip && pip install -r requirements.txt"
 }
